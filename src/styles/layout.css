@@ -1,0 +1,258 @@
+/* ==========================================================================
+   LAYOUT CSS
+   FocusBoard — Desktop & Main Dashboard Shell
+   ========================================================================== */
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--slate-50);
+}
+
+/* ==========================================================================
+   SIDEBAR (DESKTOP)
+   ========================================================================== */
+
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  background-color: #FFFFFF;
+  border-right: 1px solid var(--slate-200);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 40;
+}
+
+.sidebar-brand {
+  height: 76px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  background-color: var(--primary-600);
+  border-radius: 9px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  padding: 8px;
+  align-items: center;
+  justify-items: center;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.25);
+}
+
+.brand-logo .logo-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #FFFFFF;
+  border-radius: 1.5px;
+}
+
+.brand-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  letter-spacing: -0.02em;
+}
+
+.sidebar-section {
+  padding: 24px 16px;
+  flex: 1;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--slate-600);
+  transition: all var(--transition-fast);
+  text-align: left;
+}
+
+.sidebar-nav-item:hover {
+  background-color: var(--slate-100);
+  color: var(--slate-900);
+}
+
+.sidebar-nav-item.active {
+  background-color: var(--primary-50);
+  color: var(--primary-600);
+  font-weight: 600;
+}
+
+.sidebar-nav-item.active .nav-icon {
+  color: var(--primary-600);
+}
+
+.sidebar-footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--slate-100);
+}
+
+.workspace-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.workspace-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--slate-400);
+  letter-spacing: 0.06em;
+}
+
+.workspace-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--slate-700);
+}
+
+/* ==========================================================================
+   MAIN VIEWPORT & DASHBOARD CONTENT
+   ========================================================================== */
+
+.main-viewport {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 32px 48px;
+}
+
+.dashboard-content {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ==========================================================================
+   HEADER SECTION
+   ========================================================================== */
+
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.desktop-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.breadcrumb-category {
+  color: var(--slate-400);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.breadcrumb-separator {
+  color: var(--slate-300);
+}
+
+.breadcrumb-current {
+  color: var(--slate-700);
+}
+
+.mobile-brand-display {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background-color: var(--primary-100);
+  color: var(--primary-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid rgba(79, 70, 229, 0.15);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.user-avatar:hover {
+  transform: scale(1.05);
+}
+
+.header-banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.header-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.header-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.header-subtitle {
+  font-size: 0.9375rem;
+  color: var(--slate-500);
+}
+
+.desktop-only-text {
+  display: block;
+}
+
+.mobile-only-text {
+  display: none;
+}
+
+.new-task-btn {
+  font-size: 0.9375rem;
+  padding: 11px 22px;
+  border-radius: var(--radius-md);
+}

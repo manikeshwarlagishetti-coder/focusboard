@@ -1,0 +1,357 @@
+/* ==========================================================================
+   RESPONSIVE CSS
+   FocusBoard — Breakpoints: Desktop (1440px), Tablet (768px), Mobile (390px)
+   ========================================================================== */
+
+/* ==========================================================================
+   TABLET ADAPTATIONS (<= 1024px and <= 768px)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  .main-viewport {
+    padding: 24px 28px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .focus-notes-content {
+    gap: 20px;
+  }
+
+  .focus-floating-card {
+    width: 220px;
+    padding: 14px 16px;
+  }
+
+  .task-controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .controls-right {
+    justify-content: space-between;
+  }
+
+  .search-bar-wrapper {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* Switch to Mobile Top Header & Bottom Nav on smaller screens */
+  }
+
+  .main-viewport {
+    padding: 16px 16px 88px 16px; /* bottom padding for mobile navigation */
+  }
+
+  .header-top-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-brand-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .desktop-breadcrumb {
+    display: none;
+  }
+
+  .desktop-action-wrap {
+    display: none;
+  }
+
+  .desktop-only-text {
+    display: none;
+  }
+
+  .mobile-only-text {
+    display: block;
+  }
+
+  .task-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-add-task-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background-color: var(--primary-600);
+    color: #FFFFFF;
+    flex-shrink: 0;
+  }
+
+  .desktop-only-btn {
+    display: none;
+  }
+
+  .mobile-bottom-nav {
+    display: block;
+  }
+
+  .mobile-nav-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+  }
+
+  .focus-notes-banner {
+    padding: 24px 20px;
+    border-radius: var(--radius-xl);
+  }
+
+  .focus-notes-aside {
+    display: none; /* Mobile Figma hides the tilted preview card */
+  }
+
+  .focus-badge {
+    display: none; /* Mobile Figma uses GOOD AFTERNOON */
+  }
+
+  .focus-badge-mobile {
+    display: inline-block;
+  }
+
+  .desktop-subtext {
+    display: none;
+  }
+
+  .mobile-subtext {
+    display: block;
+  }
+
+  .carousel-indicators {
+    display: none;
+  }
+
+  .mobile-progress-wrapper {
+    display: flex;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .desktop-stat-wrapper {
+    display: none;
+  }
+
+  .stat-card {
+    padding: 14px 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.8125rem;
+  }
+
+  .stat-subtext {
+    display: none; /* Mobile Overview card shows just icon, value, label */
+  }
+
+  .task-controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .filter-tabs-container {
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-tab-btn {
+    padding: 6px 14px;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  .desktop-tab-text {
+    display: none;
+  }
+
+  .mobile-tab-text {
+    display: inline;
+  }
+
+  .controls-right {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .priority-select {
+    width: 100%;
+  }
+
+  .task-item-card {
+    position: relative;
+    padding: 14px 16px;
+  }
+
+  .task-item-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .task-left-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-right: 28px; /* space for absolute actions menu */
+  }
+
+  .task-meta-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 34px;
+    flex-wrap: wrap;
+  }
+
+  .task-actions-wrapper {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .mobile-bottom-nav {
+    display: block;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFFFFF;
+    border-top: 1px solid var(--slate-200);
+    z-index: 50;
+  }
+
+  .mobile-nav-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0 4px;
+  }
+
+  .mobile-nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 0 2px 0;
+  }
+
+  .task-form-modal {
+    padding: 24px 20px;
+    max-height: 95vh;
+  }
+
+  .form-row-2col {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* ==========================================================================
+   MOBILE TARGET (390px - Exact Mobile Figma Spec)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .main-viewport {
+    padding: 16px 16px 92px 16px;
+  }
+
+  .dashboard-content {
+    gap: 22px;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .focus-headline {
+    font-size: 1.375rem;
+  }
+
+  .focus-notes-banner {
+    padding: 20px 18px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 14px 14px;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.8125rem;
+  }
+
+  .task-item-card {
+    padding: 12px 14px;
+  }
+
+  .task-title {
+    font-size: 0.875rem;
+  }
+
+  .task-description {
+    font-size: 0.75rem;
+  }
+
+  .task-badge {
+    font-size: 0.6875rem;
+    padding: 2px 8px;
+  }
+
+  .toast-container {
+    left: 16px;
+    right: 16px;
+    bottom: 84px;
+  }
+}
