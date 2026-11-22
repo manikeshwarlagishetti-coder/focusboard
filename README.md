@@ -241,7 +241,7 @@ FocusBoard is built mobile-first and optimized for the assessment's target dimen
 ## 11. Live Deployment & Repository Links
 
 - **GitHub Repository:** [https://github.com/manikeshwarlagishetti-coder/focusboard](https://github.com/manikeshwarlagishetti-coder/focusboard)
-- **Live Vercel Production URL:** [https://focusboard-manikeshwarlagishetti-coders-projects.vercel.app](https://focusboard-manikeshwarlagishetti-coders-projects.vercel.app)
+- **Live Vercel Production URL:** [https://focusboard-wheat.vercel.app](https://focusboard-wheat.vercel.app)
 - **Vercel Project Dashboard:** [https://vercel.com/manikeshwarlagishetti-coders-projects/focusboard](https://vercel.com/manikeshwarlagishetti-coders-projects/focusboard)
 
 ---
