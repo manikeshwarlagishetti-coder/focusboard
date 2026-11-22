@@ -243,6 +243,10 @@
   gap: 8px;
 }
 
+.mobile-carousel-controls {
+  display: none;
+}
+
 .carousel-btn {
   width: 38px;
   height: 38px;

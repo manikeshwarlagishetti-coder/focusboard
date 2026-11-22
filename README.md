@@ -148,12 +148,13 @@ The application adopts a **centralized single-source-of-truth** architecture pow
 
 ---
 
-## 6. LocalStorage Implementation
+## 6. LocalStorage Implementation & Empty-List Persistence
 
 Browser persistence is handled through a custom `useLocalStorage` hook and `TaskProvider` synchronization:
 - **Key:** `focusboard_tasks`
 - **Safe Initialization:** The application first inspects `localStorage`. If existing valid records are detected, they are restored immediately.
-- **Sample Data Guard:** Initial sample tasks (`INITIAL_TASKS`) are loaded **only** if the storage key is absent or empty. Refreshing the browser or adding new tasks will **never** overwrite user modifications with initial defaults.
+- **Empty-List Persistence Guarantee:** When all tasks are deleted, the application stores `[]` in `localStorage`. The initialization logic strictly verifies `Array.isArray(parsed)`. Because it does not require `parsed.length > 0`, an empty task list is preserved across browser refreshes without resurrecting default sample tasks.
+- **Sample Data Guard:** Initial sample tasks (`INITIAL_TASKS`) are loaded **only** if the storage key is completely absent (`null`). Refreshing the browser or adding new tasks will **never** overwrite user modifications with initial defaults.
 - **Corrupted Data Resiliency:** Storage reads are wrapped in `try / catch` blocks to gracefully handle corrupted JSON strings or browser quota exceptions.
 
 ---
@@ -219,12 +220,18 @@ FocusBoard is built mobile-first and optimized for the assessment's target dimen
    ```
    Open your browser and navigate to `http://localhost:5173`.
 
-4. **Create a production build:**
+4. **Run automated test suite:**
+   ```bash
+   npm test
+   ```
+   Runs 14 unit and integration tests verifying stats, search, combined filtering, and persistence.
+
+5. **Create a production build:**
    ```bash
    npm run build
    ```
 
-5. **Preview the production build locally:**
+6. **Preview the production build locally:**
    ```bash
    npm run preview
    ```

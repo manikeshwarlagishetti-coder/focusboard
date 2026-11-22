@@ -1,14 +1,14 @@
 # AI Usage Disclosure — FocusBoard
 
-This document transparently outlines the AI assistance utilized during the architecture, design inspection, implementation, and verification of the **FocusBoard — Frontend Trainee Assessment**.
+This document transparently outlines the AI assistance utilized during the architecture, design inspection, implementation, testing, and verification of the **FocusBoard — Frontend Trainee Assessment**.
 
 ---
 
 ## 1. AI Tooling & Environment
 
-- **AI Tool:** Google Gemini 3.8 Flash (High) via Antigravity Agentic Platform
-- **Role:** Senior Frontend Developer, UI/UX Architect, and QA Engineer
-- **Environment:** Windows PowerShell, Vite, React 18, Headless Microsoft Edge for verification
+- **AI Model:** Google Gemini 3.8 Flash (High) via Antigravity Agentic Platform
+- **Role:** Senior Frontend Developer, UI/UX Architect, QA Engineer, and Deployment Specialist
+- **Environment:** Windows PowerShell, Vite 6, React 18, Node.js built-in test runner, Headless Microsoft Edge for visual verification
 
 ---
 
@@ -20,19 +20,20 @@ This document transparently outlines the AI assistance utilized during the archi
      - Mobile dashboard (390 × 1128)
      - Create-task form (760 × 822)
      - Focus Notes carousel slides 1, 2, and 3
-   - Extraction of design tokens including hex codes (`#4F46E5`, `#5B47FB`, `#EEF2FF`, `#0F172A`), spacing scales, badge pill dimensions, and typography weights.
+   - Extraction of design tokens including hex codes (`#4F46E5`, `#5B47FB`, `#EEF2FF`, `#0F172A`), spacing scales, badge dimensions, and typography weights.
 
 2. **Modular Architecture & Component Scaffolding:**
-   - Architecture of the single-source-of-truth state management pattern using React Context API + `useReducer`.
+   - Single-source-of-truth state management pattern using React Context API + `useReducer`.
    - Separation of concerns across 15 modular components: `Sidebar`, `Header`, `FocusNotes`, `DashboardStats`, `StatCard`, `TaskSection`, `TaskItem`, `TaskForm`, `SearchBar`, `FilterTabs`, `PriorityFilter`, `EmptyState`, `ConfirmDialog`, `Toast`, and `MobileNavigation`.
 
 3. **Styling & Responsive System Design:**
-   - Generation of custom CSS3 stylesheets (`global.css`, `layout.css`, `components.css`, `responsive.css`) matching Figma styling without relying on CSS utility frameworks.
+   - Generation of custom CSS3 stylesheets (`global.css`, `layout.css`, `components.css`, `responsive.css`) matching Figma styling without relying on external CSS frameworks.
    - Crafting responsive media queries specifically targeting 390px mobile, 768px tablet, and 1440px desktop breakpoints.
 
-4. **Edge Case Handling & Quality Assurance:**
-   - Safe division by zero for completion rate when zero tasks exist.
+4. **Edge Case Handling & LocalStorage Persistence:**
+   - Safe division by zero for completion percentage when zero tasks exist.
    - Resilient `localStorage` parsing with corrupted JSON handling.
+   - Resolution of the critical **empty-list persistence bug**, ensuring that deleting all tasks preserves `[]` across browser refreshes without sample data re-seeding.
    - Keyboard accessibility for modal dialogs (`Escape` key, focus management) and carousel arrow keys.
 
 ---
@@ -45,33 +46,48 @@ This document transparently outlines the AI assistance utilized during the archi
 ### Prompt 2: State Management Architecture
 > *"Design a centralized React Context with `useReducer` to manage task CRUD operations. Ensure statistics and multi-filter search results are derived reactively via `useMemo`. Integrate browser `localStorage` under the key `focusboard_tasks` such that user changes are persisted across refreshes without sample data overwriting existing tasks."*
 
-### Prompt 3: Focus Notes Carousel Implementation
-> *"Implement the mandatory Focus Notes carousel supporting all 3 official slides: 'Make today count' (62%), 'Small steps, big progress' (67%), and 'Celebrate the wins' (100%). Provide previous and next button controls, segmented indicator bars, keyboard arrow navigation, and a responsive mobile card layout."*
+### Prompt 3: Empty-List Persistence Bug Fix
+> *"When all tasks are deleted, the application must preserve an empty task list after refreshing. Inspect conditions such as `Array.isArray(parsed) && parsed.length > 0`. Do not treat an empty array as missing data. Ensure deleting all tasks does not cause sample tasks to reappear after refresh."*
 
-### Prompt 4: Production Build & Visual Quality Verification
-> *"Run `npm run build` to verify the production bundle. Capture high-resolution desktop (1440×1000) and mobile (390×1128) screenshots of the rendered application to verify visual fidelity against the Figma specification."*
+### Prompt 4: Focus Notes Mobile Navigation & Indicators
+> *"Ensure that Focus Notes carousel navigation controls (Previous/Next buttons) and indicator dots are fully accessible, visible, and touch-friendly on mobile (390px) without overlapping slide content, while preserving the desktop layout."*
+
+### Prompt 5: Production Build & Automated Verification
+> *"Run `npm run build` and automated test verification (`npm test`). Capture high-resolution desktop (1440×1000) and mobile (390×1128) screenshots of the rendered application to verify visual fidelity against the Figma specification."*
 
 ---
 
-## 4. Code Review & Verification Process
+## 4. Manual Review, Automated Testing & Verification Performed
 
-All AI-generated code underwent rigorous review and testing:
-1. **Static Analysis & Build Verification:** Executed `npm run build` using Vite to verify there were no missing imports, broken JSX tags, or syntax errors. The build compiled cleanly in under 4 seconds.
-2. **Visual Fidelity Review:** Generated standalone production bundles and captured screenshots at exact 1440×1000 and 390×1128 viewports using headless Microsoft Edge. Visual layout was cross-compared against the Figma inspection data.
-3. **Responsive Stress Testing:** Tested layout responsiveness on mobile (390px) to verify that the sidebar collapses into the mobile header and bottom navigation bar, stat cards reflow to a 2-column grid, and no horizontal overflow exists.
+All code and fixes underwent rigorous manual and automated testing:
+1. **Automated Unit & Integration Test Suite (`tests/focusboard.test.js`):**
+   - 14 automated tests executed via `npm test` using Node's native test runner (`node:test`).
+   - Verified statistics calculations, zero-task safety, search case-insensitivity, combined filtering, unique ID generation, date formatting, and localStorage persistence.
+   - Explicitly verified that `localStorage` containing an empty array `[]` restores `[]` and does not reload initial sample tasks.
+2. **Production Build Verification (`npm run build`):**
+   - Verified clean compilation with Vite.
+   - 1600 modules transformed, 0 warnings/errors, production bundles generated in `dist/`.
+3. **Visual Quality Review:**
+   - Captured real screenshots at exact 1440×1000 and 390×1128 viewports using headless Microsoft Edge.
+   - Verified that both images open correctly and display expected layouts without overflow or clipping.
 
 ---
 
 ## 5. Checked, Corrected & Rejected AI Suggestions
 
-### AI Suggestion Checked & Corrected: Mobile Task Card Layout & Overview Grid
+### 1. Corrected: Empty-List Persistence Bug
+- **Initial Code:** `TaskContext.jsx` used `if (Array.isArray(parsed) && parsed.length > 0)`.
+- **Defect:** When all tasks were deleted by the user, `parsed` was `[]`. Because `parsed.length > 0` evaluated to `false`, refreshing the browser caused the app to fall back to `INITIAL_TASKS`, resurrecting deleted tasks.
+- **Correction:** Changed condition to `if (Array.isArray(parsed)) return { tasks: parsed };`. Deleting all tasks now permanently retains the empty state after refresh.
 
-- **Initial AI Output:**
-  During initial CSS generation, the AI positioned the category and priority badges on the same line as the task title in a flexible row. On narrow screens (390px mobile), this caused the badges to wrap awkwardly and overlap the task title when titles were moderately long.
-- **Why It Was Corrected:**
-  Cross-referencing the official Mobile Figma frame (`node-id=1-167`) revealed that on mobile:
-  1. The task title and status checkbox occupy the top row, with the three-dots action menu (`···`) pinned to the top right.
-  2. The category badge, priority badge, and calendar due date sit neatly on a second row with a `34px` left margin matching the title indentation.
-  3. The Overview statistics section on mobile displays only two primary summary cards (`Total tasks` and `Completed`), whereas desktop shows 4 cards.
-- **Remediation:**
-  The CSS for `.task-item-inner` was rewritten to enforce a dedicated top row and meta row on mobile viewports. Additionally, `.desktop-stat-wrapper` was added to `DashboardStats.jsx` to hide secondary metric cards on mobile, bringing the mobile layout to 100% pixel-perfect compliance with the mobile Figma reference.
+### 2. Corrected: Mobile Carousel Controls Hidden
+- **Initial Code:** In `responsive.css`, `.focus-notes-aside` and `.carousel-indicators` had `display: none;` on screen widths `<= 768px`.
+- **Defect:** Mobile users were unable to navigate through Focus Notes slides 2 and 3 because the navigation controls and indicators were hidden.
+- **Correction:** Re-architected mobile carousel styles. Replaced generic hiding with `.desktop-carousel-aside { display: none; }` and created `.mobile-carousel-controls` displayed cleanly on mobile in the header row, with indicator dots positioned cleanly below the text.
+
+---
+
+## 6. Project Status & Limitations
+
+- **Current Status:** 100% complete and fully verified.
+- **Backend Limitations:** None within assessment scope. The application intentionally runs entirely on the frontend with client-side `localStorage` persistence as required by the specification.

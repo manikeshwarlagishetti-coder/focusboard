@@ -118,12 +118,58 @@
   }
 
   .focus-notes-banner {
-    padding: 24px 20px;
+    padding: 20px 18px;
     border-radius: var(--radius-xl);
+    overflow: hidden;
   }
 
-  .focus-notes-aside {
-    display: none; /* Mobile Figma hides the tilted preview card */
+  .focus-notes-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    gap: 12px;
+  }
+
+  .focus-notes-main {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 12px;
+  }
+
+  .focus-badge-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .mobile-carousel-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    margin-right: 4px;
+  }
+
+  .mobile-carousel-controls .carousel-btn {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-carousel-controls .carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
   }
 
   .focus-badge {
@@ -143,7 +189,19 @@
   }
 
   .carousel-indicators {
-    display: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .indicator-bar {
+    width: 26px;
+    height: 4px;
+  }
+
+  .indicator-bar.active {
+    width: 38px;
   }
 
   .mobile-progress-wrapper {

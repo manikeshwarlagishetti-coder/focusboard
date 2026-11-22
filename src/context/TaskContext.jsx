@@ -65,15 +65,24 @@ export function TaskProvider({ children }) {
     try {
       if (typeof window !== 'undefined') {
         const saved = window.localStorage.getItem(STORAGE_KEY);
-        if (saved) {
+        if (saved !== null) {
           const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed) && parsed.length > 0) {
+          // Preserve valid saved array, including empty array [] when all tasks are deleted
+          if (Array.isArray(parsed)) {
             return { tasks: parsed };
           }
         }
       }
     } catch (e) {
       console.warn('Error reading tasks from localStorage:', e);
+    }
+    // Initialize sample tasks only when no valid saved data exists
+    try {
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_TASKS));
+      }
+    } catch (e) {
+      console.warn('Error setting initial tasks to localStorage:', e);
     }
     return { tasks: INITIAL_TASKS };
   });
