@@ -204,7 +204,7 @@ FocusBoard is built mobile-first and optimized for the assessment's target dimen
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/manikeshwarlagishetti-coder/focusboard.git
    cd focusboard
    ```
 
@@ -233,7 +233,7 @@ FocusBoard is built mobile-first and optimized for the assessment's target dimen
 
 ## 11. Live Deployment & Repository Links
 
-- **GitHub Repository:** Public Git repository containing full source code and commit history.
+- **GitHub Repository:** [https://github.com/manikeshwarlagishetti-coder/focusboard](https://github.com/manikeshwarlagishetti-coder/focusboard)
 - **Live Vercel Deployment:** Ready for instant deployment on Vercel (`vercel.json` configured).
 
 ---
